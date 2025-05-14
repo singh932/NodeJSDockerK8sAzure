@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myimagekub
+spec:
+  replicas: 2
+  selector:
+    app: myimagekub
+  template:
+    metadata:
+      name: myimagekub
+      labels:
+        app: myimagekub
+    spec:
+      containers:
+        - name: myimagekub
+          image: registryhar.azurecr.io/myimage:latest
+          ports:
+            - containerPort: 5050
+      imagePullSecrets:
+        - name: acr-secret
